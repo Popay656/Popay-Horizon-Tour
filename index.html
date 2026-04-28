@@ -167,6 +167,29 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        .typing-text {
+            min-height: 2.2rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.01em;
+            position: relative;
+            overflow: hidden;
+            max-width: 720px;
+        }
+
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--accent);
+            animation: blinkCaret 0.75s infinite;
+        }
+
+        @keyframes blinkCaret {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         .footer-cta {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.22), rgba(14, 165, 233, 0.05));
             border-radius: 1.5rem;
@@ -218,6 +241,7 @@
                             Lebih Mudah, Lebih Cepat, dan Lebih Berkesan.</h1>
                         <p class="lead text-muted mb-4">Popay Horizon Tour menghadirkan pengalaman perjalanan yang hidup,
                             nyaman, dan anti-kaku untuk setiap client yang ingin mengejar momen terbaik di negeri sendiri.</p>
+                        <p id="hero-typing" class="lead text-primary mb-4 typing-text"></p>
                         <div class="d-flex flex-column flex-sm-row gap-3">
                             <a href="/paket" class="btn btn-primary btn-lg btn-glow">Lihat Paket Favorit</a>
                             <a href="/contact" class="btn btn-outline-light btn-lg">Konsultasi Gratis</a>
@@ -399,6 +423,42 @@ tour kami."</p>
                 el.style.transitionDelay = `${delay}ms`;
                 observer.observe(el);
             });
+
+            const typingElement = document.getElementById('hero-typing');
+            const typingStrings = [
+                'Buka pintu destinasi tersembunyi, dari pulau tropis hingga kota budaya penuh gaya.',
+                'Nikmati paket perjalanan yang dirancang untuk momen spektakuler tanpa repot.',
+                'Setiap perjalanan bersama Popay Horizon Tour adalah cerita baru yang tak terlupakan.'
+            ];
+            let currentString = 0;
+            let currentIndex = 0;
+            let isDeleting = false;
+            const typeSpeed = 80;
+            const pauseDelay = 1800;
+
+            function type() {
+                const fullText = typingStrings[currentString];
+                typingElement.textContent = isDeleting
+                    ? fullText.substring(0, currentIndex - 1)
+                    : fullText.substring(0, currentIndex + 1);
+
+                currentIndex += isDeleting ? -1 : 1;
+
+                if (!isDeleting && currentIndex === fullText.length) {
+                    isDeleting = true;
+                    setTimeout(type, pauseDelay);
+                } else if (isDeleting && currentIndex === 0) {
+                    isDeleting = false;
+                    currentString = (currentString + 1) % typingStrings.length;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, isDeleting ? typeSpeed / 1.5 : typeSpeed);
+                }
+            }
+
+            if (typingElement) {
+                type();
+            }
         });
     </script>
 </body>
