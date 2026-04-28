@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Popay Horizon Tour - Paket</title>
+    <style>
+        :root {
+            --bg: #07101f;
+            --surface: #0d1828;
+            --surface-soft: #132239;
+            --text: #e7edf6;
+            --muted: #9fb7d3;
+            --primary: #3b82f6;
+            --accent: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 28%),
+                linear-gradient(180deg, #020612 0%, #08111f 100%);
+            color: var(--text);
+        }
+
+        .navbar {
+            background: rgba(8, 15, 30, 0.92) !important;
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, rgba(14, 40, 78, 0.84), rgba(7, 13, 27, 0.94)),
+                url('../assets/carousel2.jpg') center/cover no-repeat;
+            padding: 5rem 0 4rem;
+            position: relative;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.24), transparent 22%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            color: #a5b8d6;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.82rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.24);
+            color: #bfdbfe;
+            font-size: 0.85rem;
+        }
+
+        .hero-headline {
+            font-size: clamp(2.3rem, 4vw, 3.7rem);
+            line-height: 1.05;
+        }
+
+        .hero-card,
+        .package-card,
+        .detail-card {
+            background: rgba(10, 18, 33, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 1.6rem;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.16);
+        }
+
+        .hero-card {
+            border: 1px solid rgba(59, 130, 246, 0.16);
+        }
+
+        .package-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .package-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            color: #dbeafe;
+            background: rgba(59, 130, 246, 0.12);
+            font-size: 0.8rem;
+        }
+
+        .package-card img {
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .filter-chip {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .filter-chip.active,
+        .filter-chip:hover {
+            color: #fff;
+            background: rgba(59, 130, 246, 0.24);
+            transform: translateY(-1px);
+        }
+
+        .search-input {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .text-muted {
+            color: #cbd5e1 !important;
+        }
+
+        .hero-card,
+        .package-card,
+        .detail-card,
+        .package-card h5,
+        .package-card p,
+        .package-card a,
+        .package-tag,
+        .section-title {
+            color: #e5e7eb;
+        }
+
+        .detail-card {
+            padding: 1.5rem;
+        }
+
+        .cta-banner {
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 25%),
+                rgba(10, 18, 33, 0.92);
+            border: 1px solid rgba(59, 130, 246, 0.16);
+        }
+
+        footer {
+            color: var(--muted);
+        }
+
+        @media (max-width: 992px) {
+            .hero-section {
+                padding: 4rem 0 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-4 py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">POPAY HORIZON TOUR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/paket">Paket</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/kupon">Kupon</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-white">
+                    <span class="hero-badge mb-3">Paket Tour Lengkap</span>
+                    <h1 class="hero-headline fw-bold">Pilih paket tour yang pas untuk setiap gaya liburanmu.</h1>
+                    <p class="lead text-muted mt-4">Dari petualangan gunung hingga liburan pantai, kami punya variasi paket yang membuat perjalananmu jadi lebih seru, personal, dan mudah.</p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a href="#packages" class="btn btn-primary btn-lg btn-glow">Lihat Semua Paket</a>
+                        <a href="/contact" class="btn btn-outline-light btn-lg">Minta Konsultasi</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="hero-card p-4">
+                        <h5 class="mb-3">Paket populer bulan ini</h5>
+                        <div class="detail-card mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Nama Paket</span>
+                                <strong>Sunrise Bromo + Kawah Ijen</strong>
+                            </div>
+                            <div class="d-flex justify-content-between text-muted">
+                                <span>Durasi</span>
+                                <span>5 hari</span>
+                            </div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted">Highlight</span>
+                                <span class="package-tag">Adventure</span>
+                            </div>
+                            <p class="text-muted mb-0">Sunrise spektakuler, trekking ringan, dan makan malam khas lokal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="packages">
+        <div class="container">
+            <div class="row align-items-end mb-4">
+                <div class="col-md-8">
+                    <span class="section-title">Paket & Promo</span>
+                    <h2 class="mt-3">Beragam pilihan tour untuk setiap kesempatan.</h2>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <input id="package-search" type="search" class="form-control search-input text-white" placeholder="Cari paket..." aria-label="Search packages">
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <button class="filter-chip active" data-filter="all">Semua</button>
+                <button class="filter-chip" data-filter="adventure">Adventure</button>
+                <button class="filter-chip" data-filter="beach">Pantai</button>
+                <button class="filter-chip" data-filter="culture">Budaya</button>
+                <button class="filter-chip" data-filter="family">Keluarga</button>
+                <button class="filter-chip" data-filter="budget">Budget</button>
+                <button class="filter-chip" data-filter="luxury">Luxury</button>
+            </div>
+
+            <div class="row g-4" id="package-grid">
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="adventure" data-name="Semeru Adventure">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/carousel1.png" class="card-img-top" alt="Semeru Adventure">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Adventure</span>
+                            <h5 class="card-title">Semeru Adventure</h5>
+                            <p class="card-text text-muted">Pendakian 6 hari dengan pemandu, campsite premium, dan sunrise spektakuler.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 2.950.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="beach" data-name="Beach Escape">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/carousel2.jpg" class="card-img-top" alt="Beach Escape">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Pantai</span>
+                            <h5 class="card-title">Beach Escape</h5>
+                            <p class="card-text text-muted">3 hari 2 malam ke pulau tropis dengan snorkeling dan sunset dinner.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 2.250.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="culture" data-name="City Culture Tour">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/carousel3.jpg" class="card-img-top" alt="City Culture Tour">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Budaya</span>
+                            <h5 class="card-title">City Culture Tour</h5>
+                            <p class="card-text text-muted">Eksplorasi kota, spot kuliner lokal, dan pengalaman seni tradisional.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 1.800.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="family" data-name="Family Fun Getaway">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/pic2.png" class="card-img-top" alt="Family Fun Getaway">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Keluarga</span>
+                            <h5 class="card-title">Family Fun Getaway</h5>
+                            <p class="card-text text-muted">Paket all-in untuk keluarga, hotel ramah anak, dan aktivitas seru.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 3.200.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="budget" data-name="Entry Class Explorer">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/carousel1.png" class="card-img-top" alt="Entry Class Explorer">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Budget</span>
+                            <h5 class="card-title">Entry Class Explorer</h5>
+                            <p class="card-text text-muted">Wisata hemat tanpa mengurangi kenyamanan dan keseruan perjalanan.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 1.150.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 package-card fade-in-up" data-category="luxury" data-name="Luxury Island Retreat">
+                    <div class="card package-card h-100 text-white">
+                        <img src="../assets/carousel2.jpg" class="card-img-top" alt="Luxury Island Retreat">
+                        <div class="card-body">
+                            <span class="package-tag mb-3">Luxury</span>
+                            <h5 class="card-title">Luxury Island Retreat</h5>
+                            <p class="card-text text-muted">Akomodasi premium, private boat, spa, dan dining eksklusif.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 d-flex justify-content-between align-items-center">
+                            <strong>Rp 4.850.000</strong>
+                            <a href="/contact" class="btn btn-sm btn-primary">Pesan Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-surface-soft">
+        <div class="container">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-6">
+                    <div class="cta-banner p-4 h-100">
+                        <span class="section-title">Paket Custom</span>
+                        <h3 class="mt-3">Buat Paket Tour sesuai kebutuhanmu.</h3>
+                        <p class="text-muted">Tidak menemukan paket yang pas? Tim kami siap merancang itinerary custom untuk grup, keluarga, honeymoon, atau perjalanan bersama teman.</p>
+                        <a href="/contact" class="btn btn-primary btn-glow mt-3">Minta Paket Custom</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="detail-card text-center">
+                                <h4 class="mb-1">400+</h4>
+                                <p class="text-muted mb-0">Destinasi tersedia</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="detail-card text-center">
+                                <h4 class="mb-1">98%</h4>
+                                <p class="text-muted mb-0">Klien puas</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="detail-card text-center">
+                                <h4 class="mb-1">24/7</h4>
+                                <p class="text-muted mb-0">Dukungan lokal</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="detail-card text-center">
+                                <h4 class="mb-1">6+</h4>
+                                <p class="text-muted mb-0">Kategori paket</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 text-center text-muted">
+        <div class="container">
+            <p class="mb-1">&copy; 2026 Popay Horizon Tour — Lebih dari sekadar paket wisata.</p>
+            <small>Temukan opsi tour modern, interaktif, dan siap menarik pelangganmu.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const filterButtons = document.querySelectorAll('.filter-chip');
+        const packageCards = document.querySelectorAll('#package-grid .package-card');
+        const searchInput = document.getElementById('package-search');
+
+        function updatePackages(filter = 'all', query = '') {
+            const keyword = query.trim().toLowerCase();
+            packageCards.forEach(card => {
+                const category = card.dataset.category;
+                const name = card.dataset.name.toLowerCase();
+                const matchesCategory = filter === 'all' || category === filter;
+                const matchesSearch = !keyword || name.includes(keyword);
+                card.style.display = matchesCategory && matchesSearch ? 'block' : 'none';
+            });
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                updatePackages(button.dataset.filter, searchInput.value);
+            });
+        });
+
+        searchInput.addEventListener('input', () => {
+            const activeFilter = document.querySelector('.filter-chip.active').dataset.filter;
+            updatePackages(activeFilter, searchInput.value);
+        });
+    </script>
+</body>
+</html>

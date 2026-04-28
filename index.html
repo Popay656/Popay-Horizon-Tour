@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Popay Horizon Tour</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --surface: #0d1117;
+            --surface-soft: #111827;
+            --surface-muted: #1f2937;
+            --accent: #3b82f6;
+            --accent-soft: rgba(59, 130, 246, 0.18);
+            --text: #e5e7eb;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 36%),
+                linear-gradient(180deg, #020617 0%, #0b1220 100%);
+            color: var(--text);
+        }
+
+        .navbar {
+            background: rgba(10, 25, 47, 0.9) !important;
+            backdrop-filter: blur(16px);
+        }
+
+        .hero {
+            min-height: calc(100vh - 72px);
+            background: linear-gradient(180deg, rgba(6, 17, 39, 0.88), rgba(6, 17, 39, 0.88)),
+                url('assets/carousel1.png') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.35), transparent 42%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .badge {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 0.85rem 1.1rem;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.16);
+            color: #bfdbfe;
+        }
+
+        .btn-glow {
+            box-shadow: 0 18px 45px rgba(59, 130, 246, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 60px rgba(59, 130, 246, 0.28);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: blur(12px);
+            border-radius: 1.75rem;
+        }
+
+        .feature-card,
+        .testimonial-card {
+            background: #111827;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            color: #e5e7eb;
+        }
+
+        .feature-card p,
+        .testimonial-card p,
+        .feature-card h5,
+        .testimonial-card strong,
+        .feature-card .icon,
+        .testimonial-card .icon,
+        .scroll-pill,
+        .hero-card,
+        .detail-card,
+        .footer-cta,
+        .hero .badge {
+            color: #e5e7eb;
+        }
+
+        .feature-card:hover,
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.25);
+        }
+
+        .feature-card .icon {
+            width: 3rem;
+            height: 3rem;
+            display: grid;
+            place-items: center;
+            border-radius: 1rem;
+            background: rgba(59, 130, 246, 0.14);
+            color: #93c5fd;
+        }
+
+        .section-title {
+            color: #fff;
+            letter-spacing: 0.04em;
+        }
+
+        .text-muted {
+            color: #cbd5e1 !important;
+        }
+
+        .feature-card,
+        .testimonial-card {
+            background: rgba(17, 24, 39, 0.96);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .footer-cta,
+        .glass-card,
+        .hero-card,
+        .contact-card,
+        .info-card {
+            color: #e5e7eb;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-cta {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.22), rgba(14, 165, 233, 0.05));
+            border-radius: 1.5rem;
+            padding: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top px-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-white" href="#">POPAY HORIZON TOUR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#packages">Paket</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimoni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 hero-content text-white">
+                        <span class="badge mb-3">Travel & Adventure</span>
+                        <h1 class="display-5 fw-semibold mb-3">Jelajahi <span class="text-primary">Indonesia</span> dengan Paket yang
+                            Lebih Mudah, Lebih Cepat, dan Lebih Berkesan.</h1>
+                        <p class="lead text-muted mb-4">Popay Horizon Tour menghadirkan pengalaman perjalanan yang hidup,
+                            nyaman, dan anti-kaku untuk setiap client yang ingin mengejar momen terbaik di negeri sendiri.</p>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a href="/paket" class="btn btn-primary btn-lg btn-glow">Lihat Paket Favorit</a>
+                            <a href="/contact" class="btn btn-outline-light btn-lg">Konsultasi Gratis</a>
+                        </div>
+                        <div class="mt-4 text-muted">Lebih dari <strong>400+</strong> destinasi lokal dieksplor, dan
+                            pengalaman setiap client selalu dipersonalisasi.</div>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block">
+                        <div class="glass-card p-4 shadow-lg fade-in-up" data-delay="100">
+                            <h2 class="h5 text-white mb-3">Temukan gaya liburan kamu</h2>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-sm btn-outline-light">Eco Adventure</button>
+                                <button class="btn btn-sm btn-outline-light">Beach Escape</button>
+                                <button class="btn btn-sm btn-outline-light">City Explore</button>
+                            </div>
+                            <p class="mt-3 small text-muted">Sentuh setiap pilihan untuk menemukan rekomendasi paket
+                                terbaik berdasarkan mood liburanmu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 bg-surface-soft">
+            <div class="container">
+                <div class="row mb-4 text-center">
+                    <div class="col-lg-8 mx-auto fade-in-up">
+                        <span class="section-title text-uppercase fw-semibold">Kenapa pilih kami?</span>
+                        <h2 class="mt-3">Paket wisata dibuat modern, fleksibel, dan menyenangkan.</h2>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4 fade-in-up" data-delay="150">
+                        <div class="feature-card p-4 h-100">
+                            <div class="icon mb-3">🌍</div>
+                            <h5>Itinerary eksklusif</h5>
+                            <p class="text-muted">Rute dirancang khusus agar setiap perjalanan terasa premium,
+                                tanpa tekanan dan selalu selesai tepat waktu.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="250">
+                        <div class="feature-card p-4 h-100">
+                            <div class="icon mb-3">🛶</div>
+                            <h5>Akomodasi nyaman</h5>
+                            <p class="text-muted">Hotel dan transportasi dipilih untuk menjaga kenyamananmu serta
+                                memberi kesan instagrammable di setiap momen perjalanan.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="350">
+                        <div class="feature-card p-4 h-100">
+                            <div class="icon mb-3">⚡</div>
+                            <h5>Dukungan 24/7</h5>
+                            <p class="text-muted">Tim kami siap membantu setiap saat, dari pra-keberangkatan hingga
+                                pulang ke rumah dengan mulus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="packages" class="py-5">
+            <div class="container">
+                <div class="row align-items-center gy-4 mb-5">
+                    <div class="col-lg-6 fade-in-up">
+                        <span class="section-title text-uppercase fw-semibold">Paket Pilihan</span>
+                        <h2 class="mt-3">Temukan paket tour yang paling cocok untukmu.</h2>
+                        <p class="text-muted">Dari wisata gunung sampai pantai, setiap paket dibuat agar kamu bisa
+                            menikmati petualangan tanpa repot.</p>
+                    </div>
+                    <div class="col-lg-6 fade-in-up" data-delay="150">
+                        <div class="scroll-pill">
+                            <span>Best Seller:</span>
+                            <strong>Sunrise Bromo + Kawah Ijen</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4 fade-in-up" data-delay="200">
+                        <div class="card feature-card h-100 p-4">
+                            <h5>Semeru Adventure</h5>
+                            <p class="text-muted">6 hari 5 malam, pendakian dengan pemandu, campsite eksklusif,
+                                dan sunrise yang tak terlupakan.</p>
+                            <a href="/paket" class="btn btn-sm btn-primary">Lihat paket</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="300">
+                        <div class="card feature-card h-100 p-4">
+                            <h5>Beach Escape</h5>
+                            <p class="text-muted">Tour pulau-pulau tropis dengan pengalaman snorkeling, kuliner, dan
+                                sunset dinner.</p>
+                            <a href="/paket" class="btn btn-sm btn-primary">Lihat paket</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="400">
+                        <div class="card feature-card h-100 p-4">
+                            <h5>City Culture</h5>
+                            <p class="text-muted">Jelajah kota budaya, kuliner lokal, serta hidden gems yang hanya
+                                diketahui penduduk setempat.</p>
+                            <a href="/paket" class="btn btn-sm btn-primary">Lihat paket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-5 bg-surface-soft">
+            <div class="container">
+                <div class="row mb-4 text-center">
+                    <div class="col-lg-8 mx-auto fade-in-up">
+                        <span class="section-title text-uppercase fw-semibold">Testimoni</span>
+                        <h2 class="mt-3">Client puas berbagi pengalaman terbaik mereka.</h2>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4 fade-in-up" data-delay="220">
+                        <div class="testimonial-card p-4 h-100">
+                            <p class="text-muted mb-3">"Popay Horizon Tour membuat perjalanan ke Bromo menjadi mudah
+                                dan berkesan. Semua detail sudah diatur dengan rapi."</p>
+                            <strong>Galuh, Surabaya</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="320">
+                        <div class="testimonial-card p-4 h-100">
+                            <p class="text-muted mb-3">"Dari booking sampai pulang, kami merasa selalu didukung. Paketnya
+                                fleksibel dan supporting staff sangat ramah."</p>
+                            <strong>Rafi, Jakarta</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in-up" data-delay="420">
+                        <div class="testimonial-card p-4 h-100">
+                            <p class="text-muted mb-3">"Kupon spesialnya membantu kami mendapatkan value lebih dari
+tour kami."</p>
+                            <strong>Sani, Bandung</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="footer-cta d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3">
+                    <div>
+                        <h3 class="mb-2">Siap mulai petualanganmu?</h3>
+                        <p class="text-muted mb-0">Jadwalkan konsultasi singkat atau langsung pilih paket yang kamu inginkan.</p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <a href="/contact" class="btn btn-primary btn-glow">Hubungi Kami</a>
+                        <a href="/kupon" class="btn btn-outline-light">Dapatkan Kupon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-4 bg-surface text-center text-muted">
+        <div class="container">
+            <p class="mb-1">&copy; 2026 Popay Horizon Tour. Dibuat untuk pengalaman travel yang lebih
+                segar.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.fade-in-up').forEach((el) => {
+                const delay = parseInt(el.dataset.delay, 10) || 0;
+                el.style.transitionDelay = `${delay}ms`;
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
